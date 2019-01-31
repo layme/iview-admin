@@ -72,14 +72,14 @@ export default [
         name: 'join_page',
         meta: {
           icon: '_qq',
-          title: 'QQ群'
+          title: '订单'
         },
         component: () => import('@/view/join-page.vue')
       }
     ]
   },
   {
-    path: '/message',
+    path: '/notification-btn',
     name: 'message',
     component: Main,
     meta: {
