@@ -26,7 +26,7 @@
             <keep-alive :include="cacheList">
               <router-view/>
             </keep-alive>
-            <ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>
+            <ABackTop :height="100" :bottom="15" :right="15" container=".content-wrapper"></ABackTop>
           </Content>
         </Layout>
       </Content>
@@ -74,9 +74,6 @@ export default {
     menuList () {
       return this.$store.getters.menuList
     },
-    local () {
-      return this.$store.state.app.local
-    },
     hasReadErrorPage () {
       return this.$store.state.app.hasReadErrorPage
     },
@@ -86,10 +83,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setBreadCrumb',
       'setTagNavList',
       'addTag',
-      'setLocal',
       'setHomeRoute',
       'closeTag'
     ]),
@@ -138,14 +133,13 @@ export default {
         route: { name, query, params, meta },
         type: 'push'
       })
-      this.setBreadCrumb(newRoute)
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute))
       this.$refs.sideMenu.updateOpenName(newRoute.name)
     }
   },
   mounted () {
     /**
-     * @description 初始化设置面包屑导航和标签导航
+     * @description 初始化设置标签导航
      */
     this.setTagNavList()
     this.setHomeRoute(routers)
@@ -153,7 +147,6 @@ export default {
     this.addTag({
       route: { name, params, query, meta }
     })
-    this.setBreadCrumb(this.$route)
     // 如果当前打开页面不在标签栏中，跳到homeName页
     if (!this.tagNavList.find(item => item.name === this.$route.name)) {
       this.$router.push({
