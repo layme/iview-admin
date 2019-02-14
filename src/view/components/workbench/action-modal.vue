@@ -1,6 +1,6 @@
 <template>
   <!-- 弹窗操作 -->
-  <Modal v-model="openModel" width="360">
+  <Modal v-model="openModal" width="360" footer-hide class-name="vertical-center-modal">
     <p slot="header">
       <Icon type="md-compass"/>
       <span>{{ step | titleFilter}}</span>
@@ -66,10 +66,6 @@
 export default {
   name: 'ActionModal',
   props: {
-    openModel: {
-      type: Boolean,
-      default: false
-    },
     step: {
       type: Number,
       default: 0
@@ -93,16 +89,32 @@ export default {
       lockBedDto: {}
     }
   },
+  computed: {
+    openModal: {
+      get: function () {
+        return !!this.$store.getters.modalStatus
+      },
+      set: function (val) {
+        this.$store.commit('showModal', val)
+      }
+    }
+  },
   methods: {
-    createOrder () {},
+    handleClose (val) {
+
+    },
+    createOrder () {
+    },
     openLockBed () {
       this.step = 1
       this.getLockReasonList()
     },
     getLockReasonList () {
-      if (this.lockReasonList.length === 0) { }
+      if (this.lockReasonList.length === 0) {
+      }
     },
-    lockBed () {},
+    lockBed () {
+    },
     openOrderDetail () {
       let orderBid = this.orderBid
       let route = {
@@ -116,15 +128,20 @@ export default {
       }
       this.$router.push(route)
     },
-    unlockBed () {}
+    unlockBed () {
+    }
   },
   filters: {
     titleFilter (val) {
       switch (val) {
-        case 0: return '选择操作'
-        case 1: return '锁定床位'
-        case 2: return '选择操作'
-        case 3: return '解锁床位'
+        case 0:
+          return '选择操作'
+        case 1:
+          return '锁定床位'
+        case 2:
+          return '选择操作'
+        case 3:
+          return '解锁床位'
       }
     }
   }

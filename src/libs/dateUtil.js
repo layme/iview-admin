@@ -1,4 +1,4 @@
-const numberToWeek = ['日', '一', '二', '三', '四', '五', '六']
+const numberToWeek = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 /**
  * 字符串日期加减
  * @param str:'yyyy-mm-dd'
