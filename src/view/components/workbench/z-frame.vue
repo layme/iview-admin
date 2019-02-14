@@ -31,17 +31,21 @@
               </div>
             </div>
           </th>
-          <th class="rows date-cell" v-for="item in stock" :key="item.date">
-            <DateCell :dateStock="item" :todayStr="todayStr" />
+          <th class="rows date-cell" v-for="item in stockData" :key="item.date">
+            <DateCell :stock="item" :todayStr="todayStr"/>
           </th>
         </tr>
-        <template v-for="(room,roomNo) in roomList">
+        <template v-for="(room,roomNo) in roomData">
           <tr v-for="(bed,bedNo) in room.beds" :key="bed.bedBid">
             <td class="cols room" v-if="bedNo === 0" :rowspan="room.beds.length">{{ room.houseTypeName }}</td>
-            <td class="cols bed">{{ bed.bedCode }}</td>
-            <td v-for="i in 30" :key="roomNo + ',' + bedNo + ',' + i"
+            <td class="cols bed">
+              <BedCell :bed="bed" />
+            </td>
+            <td v-for="i in 30" :key="i + ',' + roomNo + ',' + bedNo"
                 @mousedown="handleModal"
-                @mouseenter="handleEnter($event)">{{ roomNo }},{{ bedNo }},{{ i }}</td>
+                @mouseenter="handleMouse(i, roomNo, bedNo)"
+                @mouseleave="handleMouse(i, roomNo, bedNo)">{{ i }},{{ roomNo }},{{ bedNo }}
+            </td>
           </tr>
         </template>
       </table>
@@ -51,6 +55,8 @@
 <script>
 import { createIScroll } from '../../../libs/iscrollTable'
 import DateCell from './date-cell'
+import BedCell from './bed-cell'
+
 export default {
   name: 'ZFrame',
   props: {
@@ -68,13 +74,16 @@ export default {
     }
   },
   components: {
-    DateCell
+    DateCell,
+    BedCell
   },
   data () {
     return {
       bedCount: 0,
       startDateStr: this.todayStr,
-      open: false
+      open: false,
+      stockData: this.stock,
+      roomData: this.roomList
     }
   },
   methods: {
@@ -99,9 +108,9 @@ export default {
       this.startDateStr = date
       this.open = false
     },
-    handleEnter (event) {
-      console.info('event:', event)
-      // let el = event.currentTarget
+    handleMouse (i, roomNo, bedNo) {
+      this.stockData[i - 1].isActive = !this.stockData[i - 1].isActive
+      this.roomData[roomNo].beds[bedNo].isActive = !this.roomData[roomNo].beds[bedNo].isActive
     }
   },
   mounted () {
@@ -209,21 +218,24 @@ export default {
     width: 70px;
   }
 
-  .S_calendarBox{
+  .S_calendarBox {
     height: 40px;
     padding-top: 5px;
     padding-bottom: 5px;
   }
-  .S_calendarDate{
+
+  .S_calendarDate {
     height: 20px;
     line-height: 20px;
     text-align: center;
     outline: 0;
   }
-  .S_calendarDate span{
+
+  .S_calendarDate span {
     cursor: pointer;
   }
-  .S_calendarPage{
+
+  .S_calendarPage {
     height: 20px;
     line-height: 20px;
     text-align: center;

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import ZFrame from './z-frame'
 
 export default {
@@ -202,157 +203,144 @@ export default {
       stock: [
         {
           date: '2019-02-11',
-          availableStockCount: 29,
-          selected: false
+          availableStockCount: 29
         },
         {
           date: '2019-02-12',
-          availableStockCount: 31,
-          selected: false
+          availableStockCount: 31
         },
         {
           date: '2019-02-13',
-          availableStockCount: 41,
-          selected: false
+          availableStockCount: 41
         },
         {
           date: '2019-02-14',
-          availableStockCount: 39,
-          selected: false
+          availableStockCount: 39
         },
         {
           date: '2019-02-15',
-          availableStockCount: 40,
-          selected: false
+          availableStockCount: 40
         },
         {
           date: '2019-02-16',
-          availableStockCount: 43,
-          selected: false
+          availableStockCount: 43
         },
         {
           date: '2019-02-17',
-          availableStockCount: 49,
-          selected: false
+          availableStockCount: 49
         },
         {
           date: '2019-02-18',
-          availableStockCount: 51,
-          selected: false
+          availableStockCount: 51
         },
         {
           date: '2019-02-19',
-          availableStockCount: 50,
-          selected: false
+          availableStockCount: 50
         },
         {
           date: '2019-02-20',
-          availableStockCount: 53,
-          selected: false
+          availableStockCount: 53
         },
         {
           date: '2019-02-21',
-          availableStockCount: 58,
-          selected: false
+          availableStockCount: 58
         },
         {
           date: '2019-02-22',
-          availableStockCount: 61,
-          selected: false
+          availableStockCount: 61
         },
         {
           date: '2019-02-23',
-          availableStockCount: 61,
-          selected: false
+          availableStockCount: 61
         },
         {
           date: '2019-02-24',
-          availableStockCount: 68,
-          selected: false
+          availableStockCount: 68
         },
         {
           date: '2019-02-25',
-          availableStockCount: 69,
-          selected: false
+          availableStockCount: 69
         },
         {
           date: '2019-02-26',
-          availableStockCount: 70,
-          selected: false
+          availableStockCount: 70
         },
         {
           date: '2019-02-27',
-          availableStockCount: 70,
-          selected: false
+          availableStockCount: 70
         },
         {
           date: '2019-02-28',
-          availableStockCount: 71,
-          selected: false
+          availableStockCount: 71
         },
         {
           date: '2019-03-01',
-          availableStockCount: 72,
-          selected: false
+          availableStockCount: 72
         },
         {
           date: '2019-03-02',
-          availableStockCount: 72,
-          selected: false
+          availableStockCount: 72
         },
         {
           date: '2019-03-03',
-          availableStockCount: 73,
-          selected: false
+          availableStockCount: 73
         },
         {
           date: '2019-03-04',
-          availableStockCount: 74,
-          selected: false
+          availableStockCount: 74
         },
         {
           date: '2019-03-05',
-          availableStockCount: 74,
-          selected: false
+          availableStockCount: 74
         },
         {
           date: '2019-03-06',
-          availableStockCount: 74,
-          selected: false
+          availableStockCount: 74
         },
         {
           date: '2019-03-07',
-          availableStockCount: 74,
-          selected: false
+          availableStockCount: 74
         },
         {
           date: '2019-03-08',
-          availableStockCount: 72,
-          selected: false
+          availableStockCount: 72
         },
         {
           date: '2019-03-09',
-          availableStockCount: 72,
-          selected: false
+          availableStockCount: 72
         },
         {
           date: '2019-03-10',
-          availableStockCount: 74,
-          selected: false
+          availableStockCount: 74
         },
         {
           date: '2019-03-11',
-          availableStockCount: 74,
-          selected: false
+          availableStockCount: 74
         },
         {
           date: '2019-03-12',
-          availableStockCount: 74,
-          selected: false
+          availableStockCount: 74
         }
       ]
     }
   },
-  methods: {}
+  methods: {
+    wrapStockData () {
+      this.stock.forEach((item) => {
+        Vue.set(item, 'isActive', false)
+      })
+    },
+    wrapRoomData () {
+      this.roomList.forEach((room) => {
+        room.beds.forEach((bed) => {
+          Vue.set(bed, 'isActive', false)
+        })
+      })
+    }
+  },
+  mounted () {
+    this.wrapStockData()
+    this.wrapRoomData()
+  }
 }
 </script>

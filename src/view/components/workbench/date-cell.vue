@@ -1,5 +1,5 @@
 <template>
-  <div :class="{select: stock.selected}">
+  <div :class="{active: stock.isActive}">
     <div class="date-content">
       {{ stock.date.substring(5) }}
       <span v-if="todayStr === stock.date" class="date-week today">今天</span>
@@ -13,7 +13,7 @@ import { dateStrToWeek } from '../../../libs/dateUtil'
 export default {
   name: 'DateCell',
   props: {
-    dateStock: {
+    stock: {
       type: Object
     },
     todayStr: {
@@ -22,7 +22,6 @@ export default {
   },
   data () {
     return {
-      stock: this.dateStock
     }
   },
   methods: {
@@ -51,7 +50,7 @@ export default {
     line-height: 18px;
   }
 
-  .select {
+  .active {
     background: #45FAAA;
   }
 
