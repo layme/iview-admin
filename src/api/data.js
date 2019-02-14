@@ -49,3 +49,16 @@ export const getTreeSelectData = () => {
     method: 'get'
   })
 }
+
+export const getStockWorkbench = (startDate, endDate, houseTypeBid) => {
+  return axios.request({
+    url: 'get_stock_workbench',
+    method: 'get'
+  })
+}
+export const getStockOfPerDay = () => {
+  return axios.request({
+    url: 'get_stock_of_per_day',
+    method: 'get'
+  })
+}

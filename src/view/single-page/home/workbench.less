@@ -1,0 +1,541 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+a{
+  cursor: pointer;
+  text-decoration: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td, th {
+  padding: 0;
+}
+.clearfix:after {
+  display: block;
+  content: " ";
+  clear: both;
+}
+.clearfix { display: block; }
+
+/*禁止选中文字*/
+.S_uiSelect{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.S_bgActive {
+  background-color: #ffedb6 !important;
+}
+.S_bgSelect {
+  background-color: #88e3ff !important;
+}
+
+
+/*顶部导航样式*/
+.S_pageNav{
+  position: relative;
+  padding:10px 40px;
+  height: 100px;
+}
+.S_navContent{
+  list-style: none;
+  margin-bottom: 10px;
+}
+.S_navContent li{
+  float: left;
+  text-align: center;
+  line-height: 20px;
+  padding-right: 40px;
+}
+.S_navContent li .S_navContentTit{
+  font-size: 15px;
+  font-family: 'Microsoft YaHei';
+  color: #18a689;
+  font-weight: bold;
+}
+.S_navContent li  span{
+  font-size: 14px;
+  font-family: 'Microsoft YaHei';
+  color: #18a689;
+}
+
+.S_navContent li  a{
+  font-size: 14px;
+  font-family: 'Microsoft YaHei';
+  color: #18a689;
+}
+
+.S_roomStatusDemo{
+  list-style: none;
+}
+.S_roomStatusDemo li{
+  float: left;
+  width: 50px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 25px;
+  margin-right: 20px;
+  border-radius: 3px;
+  border: 1px solid #999;
+}
+.S_status2{
+  background-color: #7ddca3;
+}
+.S_status3{
+  background-color: #facb65;
+}
+.S_status4{
+  background-color: #00b4f7;
+}
+.S_status5{
+  background-color: #ccc;
+}
+.S_status6{
+  background-color:#8cc657;
+}
+.S_houseTypeBox{
+  margin-top: 10px;
+}
+.S_houseTypeBox>*{
+  float: left;
+  margin-right: 15px;
+}
+.S_houseTypeTit{
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #18a689;
+}
+.S_houseTypeSelect{
+  display: block;
+  width: 135px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border-radius: 4px;
+  background-color: #fff;
+  -webkit-appearance: none;
+  font-size: 12px;
+}
+.S_searchBtn{
+  background-color: #1a7bb9;
+  color: #FFF;
+  line-height: 30px;
+  width: 45px;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+}
+
+
+
+/*顶端时间轴*/
+.S_riqiBox{
+  //position: absolute;
+  //top: 160px;
+  //left: 218px;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: #ececec;
+}
+
+
+
+
+
+/*日期选择*/
+.S_dateSelect{
+  //position: absolute;
+  //top: 0;
+  //left: 0;
+  width: 180px;
+}
+.S_calendarBox{
+  height: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #dcdedf;
+}
+.S_calendarDate{
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  outline: 0;
+}
+.S_calendarDate span{
+  cursor: pointer;
+}
+.S_calendarPage{
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  outline: 0;
+}
+.S_calendarPrev,.S_calendarCurrent,.S_calendarNext{
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.S_calendarPrev,.S_calendarNext{
+  color: #09c;
+}
+.S_calendarCurrent{
+  color: #f63;
+}
+
+
+
+
+/*日期轴线*/
+.S_timeAxis{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 180px;
+  margin-left: -1px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  cursor: move;
+}
+.S_tableXaxis{
+  width: 100%;
+  //table-layout: fixed;
+}
+.S_tableBody{
+  width: 100%;
+  margin-bottom: -1px;
+  text-align: center;
+  //table-layout: fixed;
+}
+.S_tableXaxis th{
+  height: 49px;
+  background-color: #dcdedf;
+  width: 70px;
+  border: 1px solid #ccc;
+  /*border-bottom: none;*/
+}
+.S_roomDateContent{
+  height: 18px;
+  color: #666;
+  line-height: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.S_roomDateWeek{
+  margin-left: 4px;
+}
+.S_roomDateWeek.S_today{
+  color: #f63;
+}
+
+
+
+
+
+
+
+/*表格*/
+.S_tableBox{
+  position: relative;
+  //top: 170px;
+  //bottom: 0;
+  width: 100%;
+}
+
+
+
+
+/*房间，床位表格*/
+.S_roomBedTable{
+  position: relative;
+  width: 180px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.S_roomBedCon{
+  box-shadow: 0 2px 15px rgba(51, 51, 51, .3);
+  //width: 100%;
+}
+.S_roomBedCon th{
+  width: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  background-color: #f3f5f6;
+  height: 60px;
+  border: 1px solid #ccc;
+}
+.S_roomBedCon td{
+  background-color: #f3f5f6;
+  text-align: center;
+  width: 80px;
+  height: 60px;
+  border: 1px solid #ccc;
+}
+.S_bedContent{
+  display: table;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.S_bedContentCode{
+  display: table-cell;
+  width: 100%;
+  padding-bottom: 20px;
+  vertical-align: middle;
+}
+.S_bedStatus{
+  display: inline-block;
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  width: 15px;
+  height: 15px;
+  background: url('../../../assets/images/workbench_icons.png') -360px -115px no-repeat;
+  vertical-align: middle;
+  overflow: hidden;
+}
+.S_roomStatusSet{
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 20px;
+  line-height: 20px;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgba(51, 51, 51, .7);
+  color: #fff;
+  text-align: center;
+}
+
+
+
+/*滚动主框架*/
+.S_bedNightGrid{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 180px;
+  //margin-left: -1px;
+  overflow: scroll;
+}
+.S_bedNightGridTable{
+  box-shadow: 0 2px 15px rgba(51, 51, 51, .3);
+  width: 100%;
+  table-layout: fixed;
+}
+.S_bedNightGridTable td{
+  cursor: pointer;
+  text-align: center;
+  width: 70px;
+  height: 60px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+
+/*主框架td里面的展示信息样式*/
+.S_roomStatus{
+  display: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #ffedb6;
+}
+.S_roomStatusCont{
+  height: 20px;
+  padding-left: 3px;
+  padding-right: 3px;
+  line-height: 20px;
+  text-align: left;
+  word-break: break-all;
+  overflow: hidden;
+}
+.S_payed{
+  background-color: #facb65 !important;
+}
+.S_checkin{
+  background-color: #7ddca3 !important;
+}
+.S_checkout{
+  background-color: #00b4f7 !important;
+}
+.S_refunding{
+  background-color: #8cc657 !important;
+}
+.S_locking{
+  background-color: #eee !important;
+}
+
+
+
+
+
+/*遮罩层以及各种弹框*/
+.S_zhezhao{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+.S_alertBox{
+  position: fixed;
+  top: 150px;
+  left: 50%;
+  z-index: 120;
+  width: 400px;
+  margin-left: -200px;
+  border: 1px solid #f3f3f3;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(51, 51, 51, .3);
+}
+.S_alertHead{
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.S_alertTitle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: Microsoft YaHei, Simsun, sans-serif;
+}
+.S_ordersOpiton{
+  display: flex;
+  height: 60px;
+  justify-content:center;
+  align-items:center;
+}
+.S_ordersOpiton>a{
+  width: 70px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #0cf;
+  color: #ffffff;
+  border-radius: 4px;
+  margin: 0 5px;
+}
+.S_emptyOption>ul{
+  list-style: none;
+}
+.S_emptyOption>div{
+  display: flex;
+  height: 60px;
+  justify-content:center;
+  align-items:center;
+}
+.S_emptyOption a{
+  width: 70px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #0cf;
+  color: #ffffff;
+  border-radius: 4px;
+  margin: 0 5px;
+}
+.S_emptyRoomOption{
+  display: inline-block;
+  width: 90px;
+  line-height: 25px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.S_emptyDateOption{
+  display: inline-block;
+  line-height: 25px;
+  font-size: 14px;
+}
+.S_lockOption li{
+  list-style: none;
+}
+.S_lockOption span{
+  float: left;
+  line-height: 30px;
+  font-size: 14px;
+}
+.S_lockOption select{
+  display: block;
+  float: left;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border-radius: 4px;
+  background-color: #fff;
+  -webkit-appearance: none;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.S_lockOption textarea{
+  display: block;
+  float: left;
+  width: 290px;
+  height: 150px;
+  box-sizing: border-box;
+  padding: 10px;
+  line-height: 25px;
+  font-size: 14px;
+  resize: none;
+}
+.S_lockOption>div{
+  display: flex;
+  height: 60px;
+  justify-content:center;
+  align-items:center;
+}
+.S_lockOption a{
+  width: 70px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #0cf;
+  color: #ffffff;
+  border-radius: 4px;
+  margin: 0 5px;
+}
+.S_alertClose{
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  width: 28px;
+  height: 28px;
+  color: #0cf;
+  font-size: 28px;
+  line-height: 28px;
+  font-family: Simsun, Arial, sans-serif;
+  text-align: center;
+
+}
+.S_alertClose:hover{
+  -webkit-animation: closePop .5s 0s ease-in-out;
+  animation: closePop .5s 0s ease-in-out;
+}
+@-webkit-keyframes closePop{
+  0%{-webkit-transform:rotate(0deg);}
+  100%{-webkit-transform:rotate(360deg);}
+}
+@keyframes closePop{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+.S_alertContent{
+  padding: 10px 20px;
+}

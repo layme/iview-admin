@@ -1,5 +1,5 @@
 export default {
-  home: '首页',
+  home: '工作台',
   login: '登录',
   components: '组件',
   count_to_page: '数字渐变',
