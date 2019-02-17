@@ -9,7 +9,7 @@
           <Icon type="ios-arrow-down"></Icon>
         </a>
         <DropdownMenu slot="list">
-          <DropdownItem v-for="(item, index) in houseTypeList" :name="index" :key="index">{{ item.houseName }}
+          <DropdownItem v-for="(item, index) in houseTypeOptions" :name="index" :key="index">{{ item.houseName }}
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
@@ -41,6 +41,7 @@ export default {
     return {
       dateOpen: false,
       houseTypeName: '全部房型',
+      houseTypeOptions: this.houseTypeList,
 
       oDate: '',
       m: '',
@@ -80,6 +81,10 @@ export default {
       this.m = (this.oDate.getMonth() + 1) >= 10 ? '' + (this.oDate.getMonth() + 1) : '0' + (this.oDate.getMonth() + 1)
       this.d = this.oDate.getDate() >= 10 ? '' + this.oDate.getDate() : '0' + this.oDate.getDate()
       this.dataStr = dateStrMove(this.oDate.getFullYear() + '-' + this.m + '-' + this.d, -1)
+      this.houseTypeOptions.unshift({
+        bid: '',
+        houseName: '全部房型'
+      })
     },
 
     handleHouseType (name) {
@@ -124,7 +129,6 @@ export default {
 
     buildCalendar () {
       this.getData()
-      this.createTable()
     },
 
     /**

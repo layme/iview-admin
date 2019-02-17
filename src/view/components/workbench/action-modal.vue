@@ -95,7 +95,8 @@ export default {
         return !!this.$store.getters.modalStatus
       },
       set: function (val) {
-        this.$store.commit('showModal', val)
+        this.$store.commit('setModal', val)
+        this.$store.commit('setMouse', false)
       }
     }
   },

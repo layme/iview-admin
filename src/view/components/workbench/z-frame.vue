@@ -5,7 +5,7 @@
         <tr>
           <th class="rows cross" colspan="2">
             <div>
-              <div class="S_calendarDate">
+              <div class="calendar-date">
                 起始日
                 <DatePicker
                   :open="open"
@@ -39,12 +39,15 @@
           <tr v-for="(bed,bedNo) in room.beds" :key="bed.bedBid">
             <td class="cols room" v-if="bedNo === 0" :rowspan="room.beds.length">{{ room.houseTypeName }}</td>
             <td class="cols bed">
-              <BedCell :bed="bed" />
+              <BedCell :bed="bed"/>
             </td>
-            <td v-for="i in 30" :key="i + ',' + roomNo + ',' + bedNo"
-                @mousedown="handleModal"
-                @mouseenter="handleMouse(i, roomNo, bedNo)"
-                @mouseleave="handleMouse(i, roomNo, bedNo)">{{ i }},{{ roomNo }},{{ bedNo }}
+            <td v-for="(i,dateNo) in 30" :key="dateNo + ',' + roomNo + ',' + bedNo"
+                @mousedown="handleMouseDown(dateNo, roomNo, bedNo)"
+                @mouseup="handleMouseUp"
+                @mouseenter="handleMouseEnter(dateNo, roomNo, bedNo)"
+                @mouseleave="handleMouseLeave(dateNo, roomNo, bedNo)">
+              <StockCell :date="stockData[dateNo]" :room="roomData[roomNo]"
+                         :bed="roomData[roomNo].beds[bedNo]"></StockCell>
             </td>
           </tr>
         </template>
@@ -56,6 +59,7 @@
 import { createIScroll } from '../../../libs/iscrollTable'
 import DateCell from './date-cell'
 import BedCell from './bed-cell'
+import StockCell from './stock-cell'
 
 export default {
   name: 'ZFrame',
@@ -75,7 +79,8 @@ export default {
   },
   components: {
     DateCell,
-    BedCell
+    BedCell,
+    StockCell
   },
   data () {
     return {
@@ -98,8 +103,18 @@ export default {
       }
       this.bedCount = temp
     },
-    handleModal () {
-      this.$store.commit('showModal', true)
+    handleMouseDown (dateNo, roomNo, bedNo) {
+      // 设置鼠标按下状态
+      this.$store.commit('setMouse', true)
+      // 设置原点
+      this.$store.commit('setOrigin', {
+        dateIndex: dateNo,
+        bedIndex: this.roomData[roomNo].beds[bedNo].index
+      })
+      this.isSelect(dateNo, roomNo, bedNo)
+    },
+    handleMouseUp () {
+      this.$store.commit('setModal', true)
     },
     handleClick () {
       this.open = !this.open
@@ -108,13 +123,89 @@ export default {
       this.startDateStr = date
       this.open = false
     },
-    handleMouse (i, roomNo, bedNo) {
-      this.stockData[i - 1].isActive = !this.stockData[i - 1].isActive
-      this.roomData[roomNo].beds[bedNo].isActive = !this.roomData[roomNo].beds[bedNo].isActive
+    handleMouseEnter (dateNo, roomNo, bedNo) {
+      this.stockData[dateNo].isActive = true
+      this.roomData[roomNo].beds[bedNo].isActive = true
+      this.isSelect(dateNo, roomNo, bedNo)
+      this.isNoSelect(dateNo, this.roomData[roomNo].beds[bedNo].index)
+    },
+    handleMouseLeave (dateNo, roomNo, bedNo) {
+      this.stockData[dateNo].isActive = false
+      this.roomData[roomNo].beds[bedNo].isActive = false
+    },
+    isSelect (dateNo, roomNo, bedNo) {
+      if (this.$store.getters.mouseStatus) {
+        this.stockData[dateNo].isSelect = true
+        this.roomData[roomNo].beds[bedNo].isSelect = true
+      }
+    },
+    isNoSelect (dateIndex, bedIndex) {
+      if (!this.$store.getters.mouseStatus) {
+        return
+      }
+      let origin = this.$store.getters.originData
+
+      if (dateIndex > origin.dateIndex) {
+        for (let i = 0; i < this.stockData.length; i++) {
+          if (i < origin.dateIndex || i > dateIndex) {
+            this.stockData[i].isSelect = false
+          }
+        }
+
+        if (bedIndex < origin.bedIndex) {
+          // 第一象限
+          console.info('第一象限')
+
+          this.roomData.forEach((room) => {
+            room.beds.forEach((bed) => {
+              if (bed.index < bedIndex || bed.index > origin.bedIndex) {
+                bed.isSelect = false
+              }
+            })
+          })
+        } else {
+          // 第四象限
+          console.info('第四象限')
+          this.roomData.forEach((room) => {
+            room.beds.forEach((bed) => {
+              if (bed.index > bedIndex || bed.index < origin.bedIndex) {
+                bed.isSelect = false
+              }
+            })
+          })
+        }
+      } else {
+        for (let i = 0; i < this.stockData.length; i++) {
+          if (i > origin.dateIndex || i < dateIndex) {
+            this.stockData[i].isSelect = false
+          }
+        }
+
+        if (bedIndex < origin.bedIndex) {
+          // 第二象限
+          console.info('第二象限')
+          this.roomData.forEach((room) => {
+            room.beds.forEach((bed) => {
+              if (bed.index < bedIndex || bed.index > origin.bedIndex) {
+                bed.isSelect = false
+              }
+            })
+          })
+        } else {
+          // 第三象限
+          console.info('第三象限')
+          this.roomData.forEach((room) => {
+            room.beds.forEach((bed) => {
+              if (bed.index > bedIndex || bed.index < origin.bedIndex) {
+                bed.isSelect = false
+              }
+            })
+          })
+        }
+      }
     }
   },
   mounted () {
-    this.maxHeight = window.screen.height
     createIScroll('.meal-table')
   }
 }
@@ -218,27 +309,18 @@ export default {
     width: 70px;
   }
 
-  .S_calendarBox {
-    height: 40px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  .S_calendarDate {
+  .calendar-date {
     height: 20px;
     line-height: 20px;
     text-align: center;
     outline: 0;
   }
 
-  .S_calendarDate span {
+  .calendar-date span {
     cursor: pointer;
   }
 
-  .S_calendarPage {
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    outline: 0;
+  .active {
+    background: #45FAAA;
   }
 </style>

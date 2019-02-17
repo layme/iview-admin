@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ZFrame :todayStr="todayStr" :projectBid="projectBid" :roomList="roomList" :stock="stock" />
+    <ZFrame :todayStr="todayStr" :projectBid="projectBid" :roomList="roomList" :stock="stock"/>
   </div>
 </template>
 
@@ -328,12 +328,16 @@ export default {
     wrapStockData () {
       this.stock.forEach((item) => {
         Vue.set(item, 'isActive', false)
+        Vue.set(item, 'isSelect', false)
       })
     },
     wrapRoomData () {
+      let index = 0
       this.roomList.forEach((room) => {
         room.beds.forEach((bed) => {
           Vue.set(bed, 'isActive', false)
+          Vue.set(bed, 'isSelect', false)
+          Vue.set(bed, 'index', index++)
         })
       })
     }
@@ -341,6 +345,25 @@ export default {
   mounted () {
     this.wrapStockData()
     this.wrapRoomData()
+  },
+  computed: {
+    mouseStatus () {
+      return this.$store.getters.mouseStatus
+    }
+  },
+  watch: {
+    mouseStatus (val) {
+      if (!val) {
+        this.stock.forEach((item) => {
+          item.isSelect = false
+        })
+        this.roomList.forEach((room) => {
+          room.beds.forEach((bed) => {
+            bed.isSelect = false
+          })
+        })
+      }
+    }
   }
 }
 </script>

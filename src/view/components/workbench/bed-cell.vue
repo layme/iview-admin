@@ -1,5 +1,5 @@
 <template>
-  <div :class="{active: bed.isActive}">
+  <div :class="{active: bed.isActive || (bed.isSelect && $store.getters.mouseStatus)}">
     <!--<div class="subscript">-->
       <!--角标-->
     <!--</div>-->

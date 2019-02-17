@@ -1,5 +1,5 @@
 <template>
-  <div :class="{active: stock.isActive}">
+  <div :class="{active: stock.isActive || (stock.isSelect && $store.getters.mouseStatus)}">
     <div class="date-content">
       {{ stock.date.substring(5) }}
       <span v-if="todayStr === stock.date" class="date-week today">今天</span>
