@@ -206,7 +206,9 @@ export default {
     }
   },
   mounted () {
-    createIScroll('.meal-table')
+    this.$nextTick(() => {
+      createIScroll('.meal-table')
+    })
   }
 }
 </script>
@@ -266,12 +268,13 @@ export default {
     //   border-collapse: collapse; //去掉重复的border
     color: #86939e;
     font-size: 14px;
-    border: 0px solid #000;
+    border-bottom: 1px solid #dcdee2;
+    border-right: 1px solid #dcdee2;
     min-height: 100%;
     text-align: center;
     td {
-      border-bottom: 1px solid #eee;
-      border-left: 1px dashed #eee;
+      border-top: 1px solid #dcdee2;
+      border-left: 1px solid #dcdee2;
       white-space: nowrap;
       height: 60px;
       line-height: 20px;
@@ -282,12 +285,11 @@ export default {
       white-space: nowrap;
       /*height: 30px;*/
       /*line-height: 20px;*/
-      padding: 5px;
+      padding: 0 5px;
       background-color: #f3f4f6;
       font-weight: normal;
-      padding-bottom: 0;
-      padding-top: 0;
-      border: 1px solid red;
+      border-top: 1px solid #dcdee2;
+      border-left: 1px solid #dcdee2;
     }
   }
 
